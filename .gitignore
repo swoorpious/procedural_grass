@@ -1,0 +1,13 @@
+.idea
+.vs
+Binaries
+Config
+DerivedDataCache
+Intermediate
+Saved
+
+Content/__ExternalActors__
+Content/__ExternalObjects__
+Content/Developers
+Content/Megascans
+Content/MSPresets
