@@ -124,7 +124,7 @@ void AProceduralGrassCharacter::Look(const FInputActionValue& Value)
 	if (Controller != nullptr)
 	{
 		// add yaw and pitch input to controller
-		AddControllerYawInput(LookAxisVector.X);
-		AddControllerPitchInput(LookAxisVector.Y);
+		AddControllerYawInput(LookAxisVector.X * 0.2f);
+		AddControllerPitchInput(LookAxisVector.Y * 0.2f);
 	}
 }

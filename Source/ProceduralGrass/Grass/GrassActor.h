@@ -58,16 +58,19 @@ public:
     float TranslationRandomness = 0.0f; // +-TranslationRandomness
 
     UPROPERTY(EditAnywhere, Category = "Grass|Transform")
-    float RotationRandomness = 0.0f; // +-RotationRandomness
-
-    UPROPERTY(EditAnywhere, Category = "Grass|Transform")
-    float Height = 1.0f; // vertical scale
+    FVector ScaleAdjustment = FVector(1.0f, 1.0f, 1.0f); // vertical scale
 
     UPROPERTY(EditAnywhere, Category = "Grass|Transform")
     float MinHeight = 0.2f; // vertical scale - 0.2f
 
     UPROPERTY(EditAnywhere, Category = "Grass|Transform")
     float MaxHeight = 0.2f; // vertical scale + 0.2f
+
+    UPROPERTY(EditAnywhere, Category = "Grass|Transform|Rotation")
+    float RotationRandomness = 0.0f; // +-RotationRandomness
+
+    UPROPERTY(EditAnywhere, Category = "Grass|Transform|Rotation")
+    FVector RotationAdjustment = FVector::ZeroVector;
 #pragma endregion
 
 protected:
@@ -85,9 +88,9 @@ protected:
     void DestroyGrass();
 
 private:
-    FVector GetLocationAtPoint(const FVector2D& AbsoluteLocation, const FVector& WorldLocation) const;
-    FRotator GetRotationAtPoint(const FVector2D& AbsoluteLocation) const;
-    FVector GetScaleAtPoint(const FVector2D& AbsoluteLocation) const;
+    FVector GetLocationAtPoint(const FVector2D& AbsoluteLocation, const FVector& WorldLocation, float NoiseValue) const;
+    FRotator GetRotationAtPoint(const FVector2D& AbsoluteLocation, float NoiseValue) const;
+    FVector GetScaleAtPoint(const FVector2D& AbsoluteLocation, float NoiseValue) const;
 
     void InitializeNoise();
     

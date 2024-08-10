@@ -58,15 +58,20 @@ void AGrassActor::GenerateGrass()
             {
                 float x = i / Density;
                 float y = j / Density;
-                
+
                 FVector WorldLocation = GetWorldCoordinates(x, y);
                 FVector2D AbsoluteLocation(x, y);
                 
-                FVector GrassLocation = GetLocationAtPoint(AbsoluteLocation, WorldLocation);
-                FRotator GrassRotation = GetRotationAtPoint(AbsoluteLocation);
-                FVector GrassScale = GetScaleAtPoint(AbsoluteLocation);
+                float NoiseValue = Noise.GetNoise(AbsoluteLocation.X, AbsoluteLocation.Y);
+                
+                FVector GrassLocation = GetLocationAtPoint(AbsoluteLocation, WorldLocation, NoiseValue);
+                FRotator GrassRotation = GetRotationAtPoint(AbsoluteLocation, NoiseValue);
+                FVector GrassScale = GetScaleAtPoint(AbsoluteLocation, NoiseValue);
 
                 FTransform GrassTransform(GrassRotation, GrassLocation, GrassScale);
+                // GrassTransform.SetLocation(GrassLocation);
+                // GrassTransform.SetRotation(GrassRotation.Quaternion());
+                
                 InstanceTransforms.Add(GrassTransform);
             }
         }
@@ -86,10 +91,8 @@ void AGrassActor::DestroyGrass()
     InstancedStaticMeshComponent->ClearInstances();
 }
 
-FVector AGrassActor::GetLocationAtPoint(const FVector2D& AbsoluteLocation, const FVector& WorldLocation) const
+FVector AGrassActor::GetLocationAtPoint(const FVector2D& AbsoluteLocation, const FVector& WorldLocation, float NoiseValue) const
 {
-
-    // float NoiseValue = Noise.GetNoise(AbsoluteLocation.X, AbsoluteLocation.Y);
     FVector RandomOffset(FMath::RandRange(-TranslationRandomness, TranslationRandomness), FMath::RandRange(-TranslationRandomness, TranslationRandomness), 0);
 
     auto s = AbsoluteLocation.X * Size * 100;
@@ -98,16 +101,14 @@ FVector AGrassActor::GetLocationAtPoint(const FVector2D& AbsoluteLocation, const
     return Location;
 }
 
-FRotator AGrassActor::GetRotationAtPoint(const FVector2D& AbsoluteLocation) const
+FRotator AGrassActor::GetRotationAtPoint(const FVector2D& AbsoluteLocation, float NoiseValue) const
 {
-    float NoiseValue = Noise.GetNoise(AbsoluteLocation.X, AbsoluteLocation.Y);
-    return FRotator(0, FMath::RandRange(-RotationRandomness, RotationRandomness), 0);
+    return FRotator(RotationAdjustment.X + FMath::RandRange(-RotationRandomness, RotationRandomness), RotationAdjustment.Y + FMath::RandRange(-RotationRandomness, RotationRandomness), RotationAdjustment.Z + FMath::RandRange(-RotationRandomness, RotationRandomness));
 }
 
-FVector AGrassActor::GetScaleAtPoint(const FVector2D& AbsoluteLocation) const
+FVector AGrassActor::GetScaleAtPoint(const FVector2D& AbsoluteLocation, float NoiseValue) const
 {
-    float NoiseValue = Noise.GetNoise(AbsoluteLocation.X, AbsoluteLocation.Y);
-    return FVector(1.0f, 0.8f, Height + FMath::Clamp(NoiseValue, MinHeight, MaxHeight));
+    return FVector(ScaleAdjustment.X, ScaleAdjustment.Y, ScaleAdjustment.Z + NoiseValue * MaxHeight);
 }
 
 
