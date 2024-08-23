@@ -11,7 +11,7 @@ public class ProceduralGrass : ModuleRules
 		PublicIncludePaths.AddRange(
 			new string[]
 			{
-				"ProceduralGrass"
+				"ProceduralGrass",
 			}
 		);
 
@@ -21,7 +21,15 @@ public class ProceduralGrass : ModuleRules
 			{
 			}
 		);
-        
+
+		PrivateDependencyModuleNames.AddRange(new string[]
+		{
+			"RenderCore",
+			"RHI",
+			"RHICore",
+			
+		});
+		
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"Core",
@@ -29,7 +37,11 @@ public class ProceduralGrass : ModuleRules
 			"Engine",
 			"InputCore",
 			"EnhancedInput",
-			"Landscape"
+			"Landscape",
+			"RHI",
+			"RenderCore",
+			"Renderer",
+			"RHICore",
 		});
 	}
 }

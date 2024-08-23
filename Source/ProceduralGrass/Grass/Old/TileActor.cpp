@@ -1,4 +1,5 @@
-﻿#include "TileActor.h"
+﻿/*
+#include "TileActor.h"
 // #include "DrawDebugHelpers.h"
 
 
@@ -226,3 +227,4 @@ FVector ATileActor::CalculateTilePosition(int32 _tileIndex, int32 _layerIndex)
 		return FVector::ZeroVector;
 	}
 }
+*/

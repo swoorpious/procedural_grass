@@ -4,10 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "FastNoiseLite.h"
+#include "../FastNoiseLite.h"
+#include "RHI.h"
+#include "RHICommandList.h"
+
+
 
 #include "GrassActor.generated.h"
-
 
 class UHierarchicalInstancedStaticMeshComponent;
 
@@ -26,7 +29,6 @@ class PROCEDURALGRASS_API AGrassActor : public AActor
     GENERATED_BODY()
 
 public:
-    // Constructor
     AGrassActor();
 
 #pragma region Material
@@ -93,6 +95,9 @@ private:
     FVector GetScaleAtPoint(const FVector2D& AbsoluteLocation, float NoiseValue) const;
 
     void InitializeNoise();
+    void InitializeBuffers();
+    void UpdateInstanceData(FRHICommandListImmediate& RHICmdList);
+    void RenderInstances(FRHICommandListImmediate& RHICmdList);
     
     UPROPERTY(VisibleAnywhere)
     TObjectPtr<USceneComponent> SceneComponent;

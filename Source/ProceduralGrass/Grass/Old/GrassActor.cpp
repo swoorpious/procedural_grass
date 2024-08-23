@@ -4,6 +4,21 @@
 #include "Components/HierarchicalInstancedStaticMeshComponent.h"
 #include "Async/Async.h"
 
+#include "Engine/World.h"
+#include "Engine/StaticMesh.h"
+#include "Materials/MaterialInstance.h"
+#include "ShaderParameterUtils.h"
+#include "RHIStaticStates.h"
+#include "RenderCommandFence.h"
+#include "RenderResource.h"
+#include "Runtime/RenderCore/Public/RenderGraphUtils.h"
+#include "RHIDefinitions.h"
+#include "ShaderParameterMacros.h"
+#include "GlobalShader.h"
+#include "ShaderParameterStruct.h"
+#include "PipelineStateCache.h"
+#include "RenderingThread.h"
+
 DEFINE_LOG_CATEGORY(GrassSpawnTransform);
 
 
@@ -16,6 +31,18 @@ AGrassActor::AGrassActor()
 
     InstancedStaticMeshComponent = CreateDefaultSubobject<UHierarchicalInstancedStaticMeshComponent>(TEXT("InstancedStaticMeshComponent"));
     InstancedStaticMeshComponent->SetupAttachment(RootComponent);
+}
+
+void AGrassActor::InitializeBuffers()
+{
+}
+
+void AGrassActor::UpdateInstanceData(FRHICommandListImmediate& RHICmdList)
+{
+}
+
+void AGrassActor::RenderInstances(FRHICommandListImmediate& RHICmdList)
+{
 }
 
 
