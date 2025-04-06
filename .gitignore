@@ -2,9 +2,12 @@
 .vs
 *.DotSettings.user
 *.sln.iml
+*.sln
+*.suo
+*.VC.db
+*.VC.opendb
 
 Binaries
-Config
 DerivedDataCache
 Intermediate
 Saved
