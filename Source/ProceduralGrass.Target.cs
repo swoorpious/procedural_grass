@@ -9,13 +9,13 @@ public class ProceduralGrassTarget : TargetRules
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V4;
-		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_3;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;
 		ExtraModuleNames.Add("ProceduralGrass");
-		RegisterModulesCreatedByRider();
+		// RegisterModulesCreatedByRider();
 	}
 
-	private void RegisterModulesCreatedByRider()
-	{
-		ExtraModuleNames.AddRange(new string[] { "ProceduralGrassShaders" });
-	}
+	// private void RegisterModulesCreatedByRider()
+	// {
+	// 	ExtraModuleNames.AddRange(new string[] { "ProceduralGrassShaders" });
+	// }
 }

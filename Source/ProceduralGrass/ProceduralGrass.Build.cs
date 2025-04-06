@@ -1,5 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
+using System.IO;
 using UnrealBuildTool;
 
 public class ProceduralGrass : ModuleRules
@@ -12,6 +13,7 @@ public class ProceduralGrass : ModuleRules
 			new string[]
 			{
 				"ProceduralGrass",
+				Path.Combine(GetModuleDirectory("Renderer"), "Private")
 			}
 		);
 
@@ -24,24 +26,32 @@ public class ProceduralGrass : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
+			"CoreUObject",
+			"Engine",
+			"Projects",
+			"RHI", 
+			"Renderer",
 			"RenderCore",
-			"RHI",
-			"RHICore",
 			
 		});
 		
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"Core",
-			"CoreUObject",
 			"Engine",
+			
+			"CoreUObject",
 			"InputCore",
 			"EnhancedInput",
 			"Landscape",
+			
 			"RHI",
 			"RenderCore",
 			"Renderer",
 			"RHICore",
+
+			// "ProceduralGrassPlugin"
+
 		});
 	}
 }
